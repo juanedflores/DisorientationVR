@@ -10,39 +10,216 @@
       content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1"
     />
 
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.2.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.js"></script>
+
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="http://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <!-- <script src="https://rawcdn.githack.com/kylebakerio/aframe-physics-system/f7117be8f83cb75ff870941883b7973ff92d0a34/dist/aframe-physics-system.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+
+    <script>
+      AFRAME.registerComponent('push', {
+        init: function () {
+          var el = this.el;
+          el.addEventListener('collidestart', function () {
+            const impulse = new Ammo.btVector3(1.4, 1, 0);
+            const pos = new Ammo.btVector3(0, 0, 0);
+            el.body.applyImpulse(impulse, pos);
+            Ammo.destroy(impulse);
+            Ammo.destroy(pos);
+          });
+        },
+      });
+    </script>
   </head>
   <body>
-    <a-scene device-orientation-permission-ui="enabled: true">
+    <a-scene physics="debug:true; gravity: 1; driver: ammo;">
       <!-- Player -->
-      <a-entity camera movement-controls>
-        <a-entity
-          id="camera"
-          camera
-          position="0 1.6 0"
-          look-controls="pointerLockEnabled: true"
-        ></a-entity>
+      <a-entity
+        id="rig"
+        movement-controls="fly: false"
+        position="0 0 5"
+        geometry="primitive: cylinder; height: 2; radius: 0.8"
+        material="color: green; wireframe: true"
+        ammo-body="type: kinematic; emitCollisionEvents: true; mass: 3; gravity: 0 -9.8 0"
+        ammo-shape="type: cylinder"
+      >
+        <a-entity id="cam" camera position="0 1.6 0" look-controls></a-entity>
       </a-entity>
 
-      <!-- Ground -->
-      <a-grid></a-grid>
+      <a-entity
+        id="nyan"
+        geometry="primitive: box"
+        ammo-body="type: dynamic; emitCollisionEvents: true;"
+        ammo-shape="type: box"
+        width="1"
+        height="1"
+        depth="1"
+        position="2 10 0"
+        color="blue"
+        obj-model="obj: url(cube.obj)"
+      ></a-entity>
 
-      <!-- Lighting -->
-      <a-light
-        color="#ccc"
-        position="0 30 0"
-        distance="100"
-        intensity="0.4"
-        type="point"
-      ></a-light>
-      <a-light
-        color="#ccc"
-        position="3 10 -10"
-        distance="50"
-        intensity="0.4"
-        type="point"
-      ></a-light>
+      <!-- Player -->
+      <!-- <a-entity -->
+      <!--   id="rig" -->
+      <!--   movement-controls -->
+      <!--   position="0 0 10" -->
+      <!--   collision-filter="group: red; collidesWith: default" -->
+      <!-- > -->
+      <!--   <a-entity -->
+      <!--     id="camera" -->
+      <!--     camera -->
+      <!--     push -->
+      <!--     position="0 1.6 0" -->
+      <!--     look-controls="pointerLockEnabled: true" -->
+      <!--   ></a-entity> -->
+      <!-- </a-entity> -->
+
+      <!-- <a-box -->
+      <!--   color="red" -->
+      <!--   position="0 2 -5" -->
+      <!--   rotation="0 45 45" -->
+      <!--   scale="2 2 2" -->
+      <!-- ></a-box> -->
+
+      <!-- <!-1- Immovable box -1-> -->
+      <!-- <a-box -->
+      <!--   static-body -->
+      <!--   position="0 0.5 -5" -->
+      <!--   width="3" -->
+      <!--   height="1" -->
+      <!--   depth="1" -->
+      <!-- ></a-box> -->
+
+      <!-- <!-1- Dynamic box -1-> -->
+      <!-- <a-box -->
+      <!--   dynamic-body -->
+      <!--   position="5 2 0" -->
+      <!--   width="1" -->
+      <!--   height="1" -->
+      <!--   depth="1" -->
+      <!-- ></a-box> -->
+
+      <!-- Blocks -->
+
+      <a-plane
+        ammo-body="type: static"
+        ammo-shape="type: box"
+        position="0 0 -4"
+        rotation="-90 0 0"
+        width="100"
+        height="100"
+        color="yellow"
+      ></a-plane>
+
+      <a-box
+        ammo-body="type: dynamic"
+        ammo-shape="type: box"
+        position="0 4 -2"
+        width="3"
+        height="2"
+        depth="1"
+        color="red"
+      ></a-box>
+
+      <a-box
+        ammo-body="type: dynamic"
+        ammo-shape="type: box"
+        position="2 10 0"
+        width="1"
+        height="1"
+        depth="1"
+        color="blue"
+      ></a-box>
+
+      <a-entity
+        geometry="primitive: box"
+        push
+        ammo-body="type: dynamic; emitCollisionEvents: true;"
+        ammo-shape="type: box"
+        position="-3 4 -2"
+        width="1"
+        height="1"
+        depth="1"
+        material="color: green"
+      ></a-entity>
+
+      <!-- Ground -->
+      <!-- <a-plane -->
+      <!--   rotation="-90 0 0" -->
+      <!--   width="30" -->
+      <!--   height="30" -->
+      <!--   repeat="100 100" -->
+      <!-- ></a-plane> -->
+
+      <a-entity environment="preset: forest; ground: noise;"></a-entity>
+
+      <!-- Environment -->
+      <!-- <a-entity -->
+      <!--   id="env" -->
+      <!--   environment="preset: forest; dressingAmount: 500;" -->
+      <!-- ></a-entity> -->
+
+      <!-- Sky -->
+      <a-sky radius="4000" color="#6EBAA7"></a-sky>
+
+      <!-- <a-sky src="#skyTexture"></a-sky> -->
     </a-scene>
+
+    <!-- <a-scene environment="preset: forest"> -->
+    <!-- <a-assets> -->
+    <!--   <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg" /> -->
+    <!-- </a-assets> -->
+
+    <!-- <a-box -->
+    <!--   src="#boxTexture" -->
+    <!--   position="0 2 -5" -->
+    <!--   rotation="0 45 45" -->
+    <!--   scale="2 2 2" -->
+    <!--   animation__position="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true" -->
+    <!--   animation__mouseenter="property: scale; to: 2.3 2.3 2.3; dur: 300; startEvents: mouseenter" -->
+    <!--   animation__mouseleave="property: scale; to: 2 2 2; dur: 300; startEvents: mouseleave" -->
+    <!-- ></a-box> -->
+
+    <!-- <a-entity -->
+    <!--   text="value: Hello, A-Frame; color: #FAFAFA; width: 5; anchor: align" -->
+    <!--   position="-0.9 0.2 -3" -->
+    <!--   scale="1.5 1.5 1.5" -->
+    <!-- ></a-entity> -->
+    <!-- <a-camera> -->
+    <!--   <a-cursor color="#FAFAFA"></a-cursor> -->
+    <!-- </a-camera> -->
+    <!-- </a-scene> -->
   </body>
+  <script charset="utf-8">
+    var playerEl = document.querySelector('#cam');
+    playerEl.addEventListener('collide', function (e) {
+      console.log('Player has collided with body #' + e.detail.targetEl.id);
+      e.detail.targetEl; // Other entity, which playerEl touched.
+    });
+  </script>
+
+  <!-- <script charset="utf-8"> -->
+  <!--   var el = sceneEl.querySelector('#nyan'); -->
+  <!--   const force = new Ammo.btVector3(0, 1, -0); -->
+  <!--   const pos = new Ammo.btVector3( -->
+  <!--     el.object3D.position.x, -->
+  <!--     el.object3D.position.y, -->
+  <!--     el.object3D.position.z -->
+  <!--   ); -->
+  <!--   el.body.applyForce(force, pos); -->
+  <!--   Ammo.destroy(force); -->
+  <!--   Ammo.destroy(pos); -->
+  <!-- </script> -->
 </html>
