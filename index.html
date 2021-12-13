@@ -9,6 +9,11 @@
   </head>
   <body>
     <a-scene device-orientation-permission-ui="enabled: true">
+      <a-assets>
+        <a-mixin id="checkpoint"></a-mixin>
+        <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
+      </a-assets>
+
       <!-- Player -->
       <a-entity
         camera="userHeight: 1.6"
@@ -52,22 +57,8 @@
         ></a-cylinder>
       </a-entity>
 
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder
-        position="1 0.75 -3"
-        radius="0.5"
-        height="1.5"
-        color="#FFC65D"
-      ></a-cylinder>
-      <a-plane
-        position="0 0 -4"
-        rotation="-90 0 0"
-        width="4"
-        height="4"
-        color="#7BC8A4"
-      ></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <!-- Lighting -->
+      <a-light type="ambient" color="#fff"></a-light>
     </a-scene>
   </body>
 </html>
