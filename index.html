@@ -52,41 +52,186 @@
   <body>
     <a-scene id="world" physics="driver: ammo;">
       <a-assets>
-        <audio id="song" src="../music/bina48.wav" preload="auto"></audio>
+        <audio id="whisper" src="../music/whisper.wav" preload="auto"></audio>
+        <audio id="comeback" src="../music/comeback.wav" preload="auto"></audio>
+        <audio id="four" src="../music/four.wav" preload="auto"></audio>
+        <audio id="sorpresa" src="../music/sorpresa.wav" preload="auto"></audio>
+        <audio id="woman" src="../music/woman.wav" preload="auto"></audio>
+        <audio id="sorry" src="../music/sorry.wav" preload="auto"></audio>
+        <audio id="sorryman" src="../music/sorryman.wav" preload="auto"></audio>
+        <audio id="swedish" src="../music/swedish.wav" preload="auto"></audio>
       </a-assets>
 
       <!-- Player -->
       <a-entity
         id="rig"
         movement-controls="constrainToNavMesh: true; fly: false;"
-        position="0 0 0"
+        position="0 10 0"
         name="rig"
         geometry="primitive: cylinder; height: 2; radius: 0.8"
         material="color: green; wireframe: true"
-        ammo-body="type: kinematic; emitCollisionEvents: true; mass: 1; gravity: 0 1 0"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 1; gravity: 0 1 0"
         ammo-shape="type: cylinder"
         visible="false"
       >
         <a-entity id="cam" camera position="0 1.6 0" look-controls></a-entity>
       </a-entity>
 
-      <!-- <a-entity -->
-      <!--   id="stairs" -->
-      <!--   stairs="steps:3" -->
-      <!--   position="0 10 0" -->
-      <!--   ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0" -->
-      <!--   ammo-shape="type: hacd" -->
-      <!-- > -->
-      <!-- </a-entity> -->
+      <a-entity
+        id="stairs"
+        stairs="steps:100; stepWidth: 200; rotationY: 0"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: box"
+      >
+      </a-entity>
+
+      <a-entity
+        id="stairs"
+        stairs="steps:100; stepWidth: 200; positionZ: 40"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: box"
+      >
+      </a-entity>
+
+      <a-entity
+        id="stairs"
+        stairs="steps:100; stepWidth: 200; positionZ: 90"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: box"
+      >
+      </a-entity>
+
+      <a-entity
+        id="stairs"
+        stairs="steps:100; stepWidth: 200; positionZ: -90"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: box"
+      >
+      </a-entity>
+
+      <a-entity
+        id="stairs"
+        stairs="steps:10; stepWidth: 200; rotationY: 360"
+        position="0 0 0"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: box"
+      >
+      </a-entity>
+
+      <a-entity
+        id="stairs"
+        stairs="steps:100; stepWidth: 200; rotationY: 90"
+        position="0 5 0"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: box"
+      >
+      </a-entity>
+
+      <a-entity
+        id="stairs"
+        stairs="steps:100; stepWidth: 200; rotationY: 125"
+        position="0 5 0"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: box"
+      >
+      </a-entity>
 
       <a-entity
         id="box"
         box="depth:2"
         geometry="primitive: box"
-        position="0 0 -5"
-        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        position="0 0 6"
+        ammo-body="type: static; emitCollisionEvents: true; mass: 2; gravity: 0 1 0"
         ammo-shape="type: hacd"
-        audio="src: #song; loop: true"
+        audio="src: #lost; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="0 0 -6"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 3; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #whisper; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="6 0 0"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 4; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #comeback; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="-6 0 0"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 5; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #four; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="0 0 6"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 6; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #sorpresa; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="-4 0 4"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 7; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #woman; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="4 0 -4"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 8; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #sorry; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="4 0 4"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 9; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #sorryman; loop: true"
+      >
+      </a-entity>
+
+      <a-entity
+        id="box"
+        box="depth:2"
+        geometry="primitive: box"
+        position="-4 0 -4"
+        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 10; gravity: 0 1 0"
+        ammo-shape="type: hacd"
+        audio="src: #swedish; loop: true"
       >
       </a-entity>
 
@@ -163,12 +308,5 @@
       <a-entity environment="preset: yavapai; ground: flat;"></a-entity>
     </a-scene>
   </body>
-  <script charset="utf-8">
-    var playerEl = document.querySelector('#cam');
-    playerEl.addEventListener('collide', function (e) {
-      console.log('Player has collided with body #' + e.detail.targetEl.id);
-      e.detail.targetEl; // Other entity, which playerEl touched.
-    });
-  </script>
   <script src="affectbodies.js"></script>
 </html>

@@ -49,9 +49,9 @@ setTimeout(function () {
         let pos = body.getWorldPosition(worldPosition);
         // console.log(pos.y);
         let intervalID;
-        if (pos.y > 100) {
+        if (pos.y > 300) {
           Down();
-        } else if (pos.y < 40) {
+        } else if (pos.y < 100) {
           Up();
         }
         function Up() {

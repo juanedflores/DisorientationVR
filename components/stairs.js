@@ -4,6 +4,14 @@ AFRAME.registerComponent('stairs', {
     height: { type: 'number', default: 1 },
     depth: { type: 'number', default: 1 },
     steps: { type: 'number', default: 3 },
+    stepWidth: { type: 'number', default: 7 },
+    verticalStepHeight: { type: 'number', default: 3 },
+    stepThickness: { type: 'number', default: 1 },
+    horizontalStepDepth: { type: 'number', default: 3 },
+    rotationY: { type: 'number', default: 0 },
+    rotationX: { type: 'number', default: 0 },
+    rotationZ: { type: 'number', default: 0 },
+    positionZ: { type: 'number', default: 0 },
     color: { type: 'color', default: '#AAA' },
   },
 
@@ -18,10 +26,10 @@ AFRAME.registerComponent('stairs', {
     });
 
     //define the dimension of the steps
-    var stepWidth = 7;
-    var verticalStepHeight = 3;
-    var stepThickness = 1;
-    var horizontalStepDepth = 3;
+    var stepWidth = data.stepWidth;
+    var verticalStepHeight = data.verticalStepHeight;
+    var stepThickness = data.stepThickness;
+    var horizontalStepDepth = data.horizontalStepDepth;
 
     //change the number of step ups to change the steps
     for (var stepUp = 0; stepUp < data.steps; stepUp++) {
@@ -41,31 +49,55 @@ AFRAME.registerComponent('stairs', {
 
       stepMesh.position.x = 0;
       stepMesh.position.y = theChange * verticalStepHeight - stepThickness;
-      stepMesh.position.z = -horizontalStepDepth * theChange + stepThickness;
+      stepMesh.position.z = -horizontalStepDepth * theChange + stepThickness + data.positionZ;
+      // stepMesh.rotation.x = data.rotationX;
+      // stepMesh.rotation.y = data.rotationY;
+      // stepMesh.rotation.z = data.rotationZ;
+      stepMesh.rotation.x = theChange * (theChange * (data.steps / theChange));
+      stepMesh.rotation.y = theChange * (data.steps / theChange);
+      stepMesh.rotation.z = theChange * (theChange * (data.steps / theChange));
 
       scene.add(stepMesh);
 
       var stepMesh = new THREE.Mesh(stepHorizontal, this.material);
 
-      var stepHalfTickness = stepThickness / 2;
-
       stepMesh.position.x = 0;
-      stepMesh.position.y = verticalStepHeight * theChange + stepThickness;
-      stepMesh.position.z = -horizontalStepDepth * theChange;
+      stepMesh.position.y = theChange * verticalStepHeight + stepThickness;
+      stepMesh.position.z = -horizontalStepDepth * theChange + stepThickness + data.positionZ;
+      // stepMesh.rotation.x = data.rotationX;
+      // stepMesh.rotation.y = data.rotationY;
+      // stepMesh.rotation.z = data.rotationZ;
+      stepMesh.rotation.x = theChange * (theChange * (data.steps / theChange));
+      stepMesh.rotation.y = theChange * (data.steps / theChange);
+      stepMesh.rotation.z = theChange * (theChange * (data.steps / theChange));
+
+      // With three.js
+      // el.object3D.rotation.set(
+      //   THREE.Math.degToRad(0),
+      //   THREE.Math.degToRad(0),
+      //   THREE.Math.degToRad(90)
+      // );
 
       scene.add(stepMesh);
     }
 
-    // this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh = stepMesh;
 
-    this.geometry = new THREE.BoxBufferGeometry(
-      data.width,
-      data.height,
-      data.depth
-    );
+    // this.geometry = new THREE.BoxBufferGeometry(
+    //   data.width,
+    //   data.height,
+    //   data.depth
+    // );
 
     el.setObject3D('mesh', this.mesh);
+    // el.getObject3D('mesh').rotation.y += Math.PI;
+    // el.getObject3D('mesh').set(
+    //   THREE.Math.degToRad(0),
+    //   THREE.Math.degToRad(90),
+    //   THREE.Math.degToRad(0)
+    // );
+
+    el.setAttribute('rotation', { x: 90, y: 90, z: 90 });
   },
 
   /**
@@ -100,3 +132,7 @@ AFRAME.registerComponent('stairs', {
     }
   },
 });
+
+function test() {
+  var el = this.el;
+}
