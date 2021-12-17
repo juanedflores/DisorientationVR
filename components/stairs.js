@@ -49,7 +49,8 @@ AFRAME.registerComponent('stairs', {
 
       stepMesh.position.x = 0;
       stepMesh.position.y = theChange * verticalStepHeight - stepThickness;
-      stepMesh.position.z = -horizontalStepDepth * theChange + stepThickness + data.positionZ;
+      stepMesh.position.z =
+        -horizontalStepDepth * theChange + stepThickness + data.positionZ;
       // stepMesh.rotation.x = data.rotationX;
       // stepMesh.rotation.y = data.rotationY;
       // stepMesh.rotation.z = data.rotationZ;
@@ -63,7 +64,8 @@ AFRAME.registerComponent('stairs', {
 
       stepMesh.position.x = 0;
       stepMesh.position.y = theChange * verticalStepHeight + stepThickness;
-      stepMesh.position.z = -horizontalStepDepth * theChange + stepThickness + data.positionZ;
+      stepMesh.position.z =
+        -horizontalStepDepth * theChange + stepThickness + data.positionZ;
       // stepMesh.rotation.x = data.rotationX;
       // stepMesh.rotation.y = data.rotationY;
       // stepMesh.rotation.z = data.rotationZ;
