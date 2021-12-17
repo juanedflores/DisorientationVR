@@ -51,7 +51,7 @@ setTimeout(function () {
         let intervalID;
         if (pos.y > 100) {
           Down();
-        } else if (pos.y < 30) {
+        } else if (pos.y < 40) {
           Up();
         }
         function Up() {

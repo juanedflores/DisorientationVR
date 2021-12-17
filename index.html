@@ -18,51 +18,36 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.2.0/dist/aframe-environment-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.js"></script> -->
 
     <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.js"></script> -->
     <!-- <script src="https://rawcdn.githack.com/kylebakerio/aframe-physics-system/f7117be8f83cb75ff870941883b7973ff92d0a34/dist/aframe-physics-system.js"></script> -->
 
     <!-- User Components -->
-    <script src="https://unpkg.com/aframe-audio-analyser@1.0.0/dist/aframe-audio-analyser.umd.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-audio-analyser@1.0.0/dist/aframe-audio-analyser.umd.js"></script> -->
     <!-- <script src="../components/audioanalyser-volume-bind.js"></script> -->
     <!-- <script src="../components/audioanalyser-waveform.js"></script> -->
 
     <!-- <script src="../components/aframe-audio-analyser.umd.js"></script> -->
-    <script src="../components/audioanalyser-volume-scale.js"></script>
-    <script src="../components/audioanalyser-levels-scale.js"></script>
-    <script src="../components/scale-y-color.js"></script>
+    <!-- <script src="../components/audioanalyser-volume-scale.js"></script> -->
+    <!-- <script src="../components/audioanalyser-levels-scale.js"></script> -->
+    <!-- <script src="../components/scale-y-color.js"></script> -->
 
-    <script src="../components/lightmap.js"></script>
+    <!-- <script src="../components/lightmap.js"></script> -->
 
-    <script src="../components/basic_threejs.js"></script>
+    <!-- <script src="../components/basic_threejs.js"></script> -->
     <script src="../components/stairs.js"></script>
-    <script src="../components/ocean.js"></script>
+    <!-- <script src="../components/ocean.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="../components/ios_audio.js"></script>
 
-    <script src="https://unpkg.com/aframe-entity-generator-component@^3.0.0/dist/aframe-entity-generator-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-entity-generator-component@^3.0.0/dist/aframe-entity-generator-component.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script> -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
-
-    <script>
-      AFRAME.registerComponent('push', {
-        init: function () {
-          var el = this.el;
-          el.addEventListener('collidestart', function () {
-            const impulse = new Ammo.btVector3(1.4, 1, 0);
-            const pos = new Ammo.btVector3(0, 0, 0);
-            el.body.applyImpulse(impulse, pos);
-            Ammo.destroy(impulse);
-            Ammo.destroy(pos);
-          });
-        },
-      });
-    </script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script> -->
   </head>
   <body>
     <a-scene id="world" physics="driver: ammo;">
@@ -78,30 +63,30 @@
         name="rig"
         geometry="primitive: cylinder; height: 2; radius: 0.8"
         material="color: green; wireframe: true"
-        ammo-body="type: dynamic; emitCollisionEvents: true; mass: 1; gravity: 0 1 0"
+        ammo-body="type: kinematic; emitCollisionEvents: true; mass: 1; gravity: 0 1 0"
         ammo-shape="type: cylinder"
         visible="false"
       >
         <a-entity id="cam" camera position="0 1.6 0" look-controls></a-entity>
       </a-entity>
 
-      <a-entity
-        id="stairs"
-        stairs="steps:3"
-        position="0 5 0"
-        ammo-body="type: dynamic; emitCollisionEvents: true; gravity: 0 1 0"
-        ammo-shape="type: hacd"
-      >
-      </a-entity>
+      <!-- <a-entity -->
+      <!--   id="stairs" -->
+      <!--   stairs="steps:3" -->
+      <!--   position="0 10 0" -->
+      <!--   ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0" -->
+      <!--   ammo-shape="type: hacd" -->
+      <!-- > -->
+      <!-- </a-entity> -->
 
       <a-entity
         id="box"
-        geometry="primitive: box"
-        ammo-body="type: dynamic; emitCollisionEvents: true; gravity: 0 1 0"
-        ammo-shape="type: box"
         box="depth:2"
+        geometry="primitive: box"
+        position="0 0 -5"
+        ammo-body="type: static; emitCollisionEvents: true; gravity: 0 0 0"
+        ammo-shape="type: hacd"
         audio="src: #song; loop: true"
-        position="0 10 0"
       >
       </a-entity>
 
